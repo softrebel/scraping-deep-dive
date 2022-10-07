@@ -7,6 +7,8 @@ Deep Dive into Scraping is a about scraping methods and architecure to gathering
 # Executing Steps
 To run codes, please follow these step:
 
+- Install Firefox on your device
+
 - Execute command in this directory: `python
 pip install -r requirements.txt`
 

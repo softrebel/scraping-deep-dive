@@ -12,7 +12,7 @@ class NobatDoctorSpider(scrapy.Spider):
         for doctors in response.xpath("//a[@class='drList nicehover']"):
             name=doctors.xpath("div[@class='mainDetail']/div[contains(@class,'drName')]/text()").extract_first().strip()
             profession=doctors.xpath("div[@class='mainDetail']/div[contains(@class,'drSpecialty')]/h3/text()").extract_first().strip()
-            self.found_doctors.append(dict(name=name,professions=profession))
+            self.found_doctors.append(dict(name=name,profession=profession))
 
 
 

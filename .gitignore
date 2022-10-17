@@ -130,3 +130,6 @@ dmypy.json
 output_*
 crawl/output_*
 sample/
+files/
+music/
+crawl/*.json

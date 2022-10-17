@@ -44,9 +44,9 @@ if __name__ == '__main__':
     process = CrawlerProcess({
         'LOG_LEVEL': 'DEBUG',
         'FEED_FORMAT': 'json',
-        'FEED_URI':'result.json',
-        'FEED_EXPORT_ENCODING':'utf-8',
-        'CONCURRENT_REQUESTS':100,
+        'FEED_URI': 'output_crawl_scrapy.json',
+        'FEED_EXPORT_ENCODING': 'utf-8',
+        'CONCURRENT_REQUESTS': 100,
     })
     process.crawl(NobatDoctorSpider)
     spider = next(iter(process.crawlers)).spider

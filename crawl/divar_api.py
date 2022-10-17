@@ -56,6 +56,7 @@ def get_first_page():
 
 def get_other_pages(last_post_date):
     print('crawling other pages')
+    # for i in range(4):
     for i in range(1):
         url = 'https://api.divar.ir/v8/web-search/tehran/vehicles'
         payload = json.dumps({

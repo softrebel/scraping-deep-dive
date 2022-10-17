@@ -9,9 +9,13 @@ To run codes, please follow these step:
 
 - Install Firefox on your device
 
-- Execute command in this directory: `python
-pip install -r requirements.txt`
+- Execute command in this directory: 
+```python
+pip install -r requirements.txt
+```
 
-- Run any files normally such as: `python
-python nobat_scrapy.py`
+- Run any files normally such as: 
+```python
+python nobat_scrapy.py
+```
 

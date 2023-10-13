@@ -4,13 +4,12 @@ import os
 import json
 
 import time
-
+# pip install requests
 
 start = time.time()
 os.chdir(os.path.dirname(__file__))
 base_url = "https://nobat.ir/find/city-1/c-7/page-{page}"
 doctor_list = []
-doctor_url = "https://nobat.ir{url}"
 page = 1
 for item in range(1, 6):
     page = item
@@ -19,7 +18,6 @@ for item in range(1, 6):
     res = requests.get(url)
     soup = BeautifulSoup(res.text, "lxml")
     doctors = soup.find_all("a", {"class": "doctor-ui"})
-    # doctors = []
     for doctor in doctors[:10]:
         doctor_dict = dict()
         doctor_dict["name"] = (
@@ -30,12 +28,6 @@ for item in range(1, 6):
         for item in specialties:
             doctor_dict["profession"].append(item.text.strip())
 
-        # doctor_dict["profession"] = (
-        #     doctor.find("div", {"class": "doctor-ui-specialty"})
-        #     .find("div", {"class": "drSpecialty"})
-        #     .find("h3")
-        #     .text.strip()
-        # )
         print("crawling", doctor_dict["name"])
         res = requests.get(doctor["href"])
         doc_soup = BeautifulSoup(res.text, "lxml")
@@ -53,28 +45,6 @@ for item in range(1, 6):
             comments = json.loads(res.text)[0]
             doctor_dict["comments"] = comments
         doctor_list.append(doctor_dict)
-        # comments_soup = BeautifulSoup(res.text, "lxml")
-
-        # comments = []
-
-        # comments_css = doc_soup.find_all(
-        #     "div", {"class": "comments_comment_box__2F_q8"}
-        # )
-        # for comment in comments_css:
-        #     text = comment.select("div > span")
-        #     date = comment.select("small")
-        #     comments.append(dict(text=text, date=date))
-        # # for field in doc_soup.select("li[class=list-inline-item]>span"):
-        # #     extra.append(field.text.strip())
-        # doctor_dict["comments"] = comments
-        # doctor_list.append(doctor_dict)
-
-    # last_soup = soup.find_all('li',{'class':'pagination-item'})
-    # last = int(soup.find_all("a", {"class": "pagination-item"})[-1].text.strip())
-    # last = int(response.xpath("//div[@class='paging']/a[last()]/text()").extract_first())
-    # if page >= last:
-    #     break
-    # page += 1
 
 with open("output_crawl_requests.json", "w", encoding="utf-8") as f:
     import json

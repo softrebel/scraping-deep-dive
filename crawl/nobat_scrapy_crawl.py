@@ -15,12 +15,10 @@ class NobatDoctorSpider(scrapy.Spider):
         "https://nobat.ir/find/city-1/c-7/page-1",
     ]
     url_format = "https://nobat.ir/find/city-1/c-7/page-{page}"
-    # found_doctors = []
-    doctor_url = "https://nobat.ir{url}"
 
     def parse(self, response):
         print("url:", response.url)
-        if not "page-" in response.url:
+        if "page-" not in response.url:
             page = 1
         else:
             page = int(response.url.split("page-")[-1])
@@ -33,14 +31,6 @@ class NobatDoctorSpider(scrapy.Spider):
             )
             for item in specialties:
                 professions.append(item.extract().strip())
-            # profession = (
-            #     doctors.xpath(
-            #         "div[@class='mainDetail']/div[contains(@class,'drSpecialty')]/h3/text()"
-            #     )
-            #     .extract_first()
-            #     .strip()
-            # )
-            # self.found_doctors.append(dict(name=name, professions=professions))
             item = dict(name=name, professions=professions)
             yield scrapy.Request(
                 doctors.attrib["href"],
@@ -93,10 +83,6 @@ if __name__ == "__main__":
     process.crawl(NobatDoctorSpider)
     spider = next(iter(process.crawlers)).spider
     process.start()
-
-    # with open('output_scrapy_crawl.json', 'w', encoding='utf-8') as f:
-    #     import json
-    #     f.write(json.dumps(spider.found_doctors, ensure_ascii=False, indent=4))
 
     end = time.time()
     print("time elapsed:")
